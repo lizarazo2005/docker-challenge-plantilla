@@ -1,0 +1,21 @@
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_URL: postgresql://challenge:challengepass@db:5432/challenge
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: challenge
+      POSTGRES_PASSWORD: challengepass
+      POSTGRES_DB: challenge
+    volumes:
+      - datos_postgres:/var/lib/postgresql/data
+
+volumes:
+  datos_postgres:
